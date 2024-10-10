@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class ListProductController extends Controller
 {
-    //
+    public function __invoke(string $ProductUuid)
+    {
+    }
 }

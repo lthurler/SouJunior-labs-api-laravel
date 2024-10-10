@@ -34,11 +34,11 @@ Route::get('/users', [ListUserController::class, '__invoke'])
     ->name('api.users.list');
 
 Route::get('/products/{userUuid}', [ListProductController::class, '__invoke'])
-    ->where('userUuid', '[0-9]+')
+    ->whereUuid('userUuid')
     ->name('api.products.list');
 
 Route::get('/squads/{productUuid}', [ListSquadController::class, '__invoke'])
-    ->where('productUuid', '[0-9]+')
+    ->whereUuid('productUuid')
     ->name('api.squad.list');
 
 Route::get('/squad/{uuid}/members', [ListMemberController::class, '__invoke'])
@@ -111,23 +111,19 @@ Route::prefix('squad')->group(function () {
     Route::prefix('{uuid}/member')->group(function () {
 
         Route::get('/{memberUuid}', [ShowMemberController::class, '__invoke'])
-            ->where('memberUuid', '[0-9]+')
+            ->whereUuid('memberUuid')
             ->name('api.member.show');
 
         Route::post('/', [CreateMemberController::class, '__invoke'])
             ->name('api.member.create');
 
         Route::put('/{memberUuid}', [EditMemberController::class, '__invoke'])
-            ->where('memberUuid', '[0-9]+')
+            ->whereUuid('memberUuid')
             ->name('api.member.edit');
 
         Route::delete('/{memberUuid}', [DeleteMemberController::class, '__invoke'])
-            ->where('memberUuid', '[0-9]+')
+            ->whereUuid('memberUuid')
             ->name('api.member.del');
 
     });
 });
-
-
-
-

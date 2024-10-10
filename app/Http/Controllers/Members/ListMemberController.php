@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class ListMemberController extends Controller
 {
-    //
+    public function __invoke(string $memberUuid)
+    {
+    }
 }
