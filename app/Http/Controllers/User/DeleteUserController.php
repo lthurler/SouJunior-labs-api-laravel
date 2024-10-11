@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class DeleteUserController extends Controller
 {
-    //
+    public function __invoke($id)
+    {
+    }
 }

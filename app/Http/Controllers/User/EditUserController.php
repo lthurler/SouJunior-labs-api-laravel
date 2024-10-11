@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class EditUserController extends Controller
 {
-    //
+    public function __invoke(int $id)
+    {
+    }
 }

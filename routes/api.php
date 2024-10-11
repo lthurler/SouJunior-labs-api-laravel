@@ -33,10 +33,13 @@ use App\Http\Controllers\Products\DeleteProductController;
 Route::get('/users', [ListUserController::class, '__invoke'])
     ->name('api.users.list');
 
+
+// pode ou não ter userUuid, o userUuid vem do front
 Route::get('/products/{userUuid}', [ListProductController::class, '__invoke'])
     ->whereUuid('userUuid')
     ->name('api.products.list');
 
+//  pode ou não ter productUuid
 Route::get('/squads/{productUuid}', [ListSquadController::class, '__invoke'])
     ->whereUuid('productUuid')
     ->name('api.squad.list');

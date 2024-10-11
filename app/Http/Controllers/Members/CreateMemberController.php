@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class CreateMemberController extends Controller
 {
-    //
+    public function __invoke(string $uuid)
+    {
+    }
 }

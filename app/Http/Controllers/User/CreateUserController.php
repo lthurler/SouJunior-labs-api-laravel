@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class CreateUserController extends Controller
 {
-    //
+    public function __invoke()
+    {
+    }
 }

@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class PermissionUserController extends Controller
 {
-    //
+    public function __invoke(string $uuid)
+    {
+    }
 }
