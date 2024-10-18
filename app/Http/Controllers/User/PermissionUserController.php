@@ -21,7 +21,7 @@ class PermissionUserController extends Controller
         if ($user->permission !== 'admin') {
             return response()->json(
                 [
-                    'error' => 'Você não tem permissão para autalizar este produto.',
+                    'error' => 'Você não tem permissão para atualizar este produto.',
                 ],
                 403
             );
