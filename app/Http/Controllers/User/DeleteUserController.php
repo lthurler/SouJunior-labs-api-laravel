@@ -15,22 +15,23 @@ class DeleteUserController extends Controller
         if ($user->uuid !== $id) {
 
             return response()->json([
-                'error' => 'Você não tem permissão para deletar este usuário.',
+                'erro' => 'Você não tem permissão para deletar este usuário.',
             ], 403);
         }
 
         if (is_null($id)) {
 
             return response()->json([
-                'error' => 'O email é necessário para deletar o usuário.',
+                'erro' => 'O email é necessário para deletar o usuário.',
             ], 400);
         }
 
         $user = User::query()->where('uuid', $id)->first();
 
         if (is_null($user)) {
+
             return response()->json([
-                'error' => 'Usuário não encontrado.',
+                'erro' => 'Usuário não encontrado.',
             ], 404);
         }
 
@@ -38,6 +39,6 @@ class DeleteUserController extends Controller
 
         return response()->json([
             'message' => 'Usuário deletado com sucesso!',
-        ]);
+        ], 200);
     }
 }

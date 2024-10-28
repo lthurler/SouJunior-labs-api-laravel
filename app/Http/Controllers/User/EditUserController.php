@@ -15,7 +15,7 @@ class EditUserController extends Controller
         if (is_null($user)) {
 
             return response()->json([
-                'error' => 'Usuário não encontrado.',
+                'erro' => 'Usuário não encontrado.',
             ], 404);
         }
 
