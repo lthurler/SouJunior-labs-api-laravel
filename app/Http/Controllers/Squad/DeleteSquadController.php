@@ -14,7 +14,7 @@ class DeleteSquadController extends Controller
         $user = auth()->user();
         $squad = Squad::query()->where('uuid', $uuid)->first();
 
-        if (is_null($squad)) {
+        if (!$squad) {
 
             return response()->json(['erro' => 'Squad não encontrada'], 404);
         }
@@ -22,7 +22,7 @@ class DeleteSquadController extends Controller
 
         $product = Product::query()->where('uuid', $squad->product_uuid)->first();
 
-        if (is_null($product)) {
+        if (!$product) {
 
             return response()->json(['erro' => 'Produto não encontrado'], 404);
         }

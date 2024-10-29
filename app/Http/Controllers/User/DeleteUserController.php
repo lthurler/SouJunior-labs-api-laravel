@@ -19,7 +19,7 @@ class DeleteUserController extends Controller
             ], 403);
         }
 
-        if (is_null($id)) {
+        if (!$id) {
 
             return response()->json([
                 'erro' => 'O email é necessário para deletar o usuário.',
@@ -28,7 +28,7 @@ class DeleteUserController extends Controller
 
         $user = User::query()->where('uuid', $id)->first();
 
-        if (is_null($user)) {
+        if (!$user) {
 
             return response()->json([
                 'erro' => 'Usuário não encontrado.',

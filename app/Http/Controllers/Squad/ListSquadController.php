@@ -10,9 +10,9 @@ class ListSquadController extends Controller
 {
     public function __invoke(string $productUuid = false)
     {
-        if (empty($productUuid) === false) {
+        if (!empty($productUuid)) {
 
-            $squad = Squad::query()->where('product_uuid', $productUuid);
+            $squad = Squad::query()->where('product_uuid', $productUuid)->first();
 
         } else {
 

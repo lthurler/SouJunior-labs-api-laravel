@@ -12,7 +12,7 @@ class PermissionUserController extends Controller
     {
         $user = User::query()->where('uuid', $uuid)->first();
 
-        if (is_null($user)) {
+        if (!$user) {
             return response()->json([
                 'erro' => 'Usuário não encontrado.',
             ], 404);

@@ -12,7 +12,7 @@ class ShowSquadController extends Controller
     {
         $squad = Squad::query()->where('uuid', $uuid);
 
-        if (is_null($squad)) {
+        if (!$squad) {
 
             return response()->json(['erro' => 'Squad não encontrada', 404]);
         }

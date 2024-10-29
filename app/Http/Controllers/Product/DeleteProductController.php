@@ -6,15 +6,15 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EditProductController extends Controller
+class DeleteProductController extends Controller
 {
-    public function __invoke(Request $request, string $uuid)
+    public function __invoke(string $uuid)
     {
+        $product = Product::query()->where('uuid', $uuid);
+
         $user = auth()->user();
 
-        $product = Product::query()->where('uuid', $uuid)->first();
-
-        if (is_null($product)) {
+        if (!$product) {
 
             return response()->json([
                 'erro' => 'Produto não encontrado'
@@ -28,13 +28,10 @@ class EditProductController extends Controller
             ], 403);
         }
 
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
-        $product->save();
+        $product->delete();
 
         return response()->json([
-            'message' => 'Produto atualizado com sucesso',
-            'Product' => $product
+            'Message' => 'Produto deletado com sucesso'
         ], 200);
     }
 }
