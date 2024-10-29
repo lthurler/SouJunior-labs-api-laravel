@@ -14,7 +14,7 @@ class EditMemberController extends Controller
 
         if (!$member) {
 
-            return response()->json(['erro' => 'Membro não encontrado'], 404);
+            return response()->json(['error' => 'Membro não encontrado'], 404);
         }
 
         $member->name = $request->input('name');

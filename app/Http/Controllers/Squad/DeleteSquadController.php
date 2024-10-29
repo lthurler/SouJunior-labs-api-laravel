@@ -16,7 +16,7 @@ class DeleteSquadController extends Controller
 
         if (!$squad) {
 
-            return response()->json(['erro' => 'Squad não encontrada'], 404);
+            return response()->json(['error' => 'Squad não encontrada'], 404);
         }
 
 
@@ -24,13 +24,13 @@ class DeleteSquadController extends Controller
 
         if (!$product) {
 
-            return response()->json(['erro' => 'Produto não encontrado'], 404);
+            return response()->json(['error' => 'Produto não encontrado'], 404);
         }
 
 
         if ($user->uuid !== $product->owner_uuid) {
 
-            return response()->json(['erro' => 'Você não tem autorização para atualizar essa squad'], 403);
+            return response()->json(['error' => 'Você não tem autorização para atualizar essa squad'], 403);
         }
 
         $squad->delete();

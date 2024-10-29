@@ -18,7 +18,7 @@ class CreateUserController extends Controller
         if ($token !== env('REGISTER_TOKEN')) {
 
             return response()->json([
-                'erro' => 'Token inválido.',
+                'error' => 'Token inválido.',
             ], 403);
         }
 
@@ -64,7 +64,7 @@ class CreateUserController extends Controller
         } else {
 
             return response()->json([
-                'erro' => 'Não foi possível realizar o cadastro.',
+                'error' => 'Não foi possível realizar o cadastro.',
             ], 500);
         }
     }

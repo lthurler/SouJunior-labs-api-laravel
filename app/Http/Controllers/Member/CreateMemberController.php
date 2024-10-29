@@ -21,6 +21,6 @@ class CreateMemberController extends Controller
         return response()->json([
             'message' => 'Membro criado com sucesso',
             'membro' => $member
-        ], 200);
+        ], 201);
     }
 }

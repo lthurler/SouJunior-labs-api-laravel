@@ -14,14 +14,14 @@ class PermissionUserController extends Controller
 
         if (!$user) {
             return response()->json([
-                'erro' => 'Usuário não encontrado.',
+                'error' => 'Usuário não encontrado.',
             ], 404);
         }
 
         if ($user->permission !== 'admin') {
             return response()->json(
                 [
-                    'erro' => 'Você não tem permissão para atualizar este produto.',
+                    'error' => 'Você não tem permissão para atualizar este produto.',
                 ],
                 403
             );

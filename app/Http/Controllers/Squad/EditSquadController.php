@@ -16,7 +16,7 @@ class EditSquadController extends Controller
 
         if (!$squad) {
 
-            return response()->json(['erro' => 'Squad não encontrada'], 404);
+            return response()->json(['error' => 'Squad não encontrada'], 404);
         }
 
 
@@ -24,13 +24,13 @@ class EditSquadController extends Controller
 
         if (!$product) {
 
-            return response()->json(['erro' => 'Produto não encontrado'], 404);
+            return response()->json(['error' => 'Produto não encontrado'], 404);
         }
 
 
         if ($user->uuid !== $product->owner_uuid) {
 
-            return response()->json(['erro' => 'Você não tem permissão para atualizar esse produto'], 403);
+            return response()->json(['error' => 'Você não tem permissão para atualizar esse produto'], 403);
         }
 
 

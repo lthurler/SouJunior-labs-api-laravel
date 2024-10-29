@@ -14,7 +14,7 @@ class ShowSquadController extends Controller
 
         if (!$squad) {
 
-            return response()->json(['erro' => 'Squad não encontrada', 404]);
+            return response()->json(['error' => 'Squad não encontrada', 404]);
         }
 
         return response()->json($squad, 200);

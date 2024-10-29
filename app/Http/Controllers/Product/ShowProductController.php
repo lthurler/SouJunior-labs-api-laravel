@@ -15,7 +15,7 @@ class ShowProductController extends Controller
         if (!$product) {
 
             return response()->json([
-                'erro' => 'Produto não encontrado'
+                'error' => 'Produto não encontrado'
             ], 404);
         }
 
