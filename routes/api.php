@@ -31,110 +31,105 @@ use App\Http\Controllers\Products\DeleteProductController;
 Route::match(['get', 'post', 'head', 'options'], '/', [IndexController::class, 'index']);
 
 
-Route::prefix('api')->group(function () {
+Route::get('/login', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
 
-    Route::get('/login', function (Request $request) {
-        return $request->user();
-    })->middleware('auth:sanctum');
+Route::post('/login', [AuthController::class, 'login'])
+    ->name('api.login');
 
-    Route::post('/login', [AuthController::class, 'login'])
-        ->name('api.login');
+Route::get('/users', [ListUserController::class, '__invoke'])
+    ->name('api.users.list');
 
-    Route::get('/users', [ListUserController::class, '__invoke'])
-        ->name('api.users.list');
+Route::get('/products/{userUuid}', [ListProductController::class, '__invoke'])
+    ->whereUuid('userUuid')
+    ->name('api.products.list');
 
-    Route::get('/products/{userUuid}', [ListProductController::class, '__invoke'])
-        ->whereUuid('userUuid')
-        ->name('api.products.list');
+Route::get('/squads/{productUuid}', [ListSquadController::class, '__invoke'])
+    ->whereUuid('productUuid')
+    ->name('api.squad.list');
 
-    Route::get('/squads/{productUuid}', [ListSquadController::class, '__invoke'])
-        ->whereUuid('productUuid')
-        ->name('api.squad.list');
+Route::get('/squad/{uuid}/members', [ListMemberController::class, '__invoke'])
+    ->whereUuid('uuid')
+    ->name('api.members.list');
 
-    Route::get('/squad/{uuid}/members', [ListMemberController::class, '__invoke'])
+
+Route::prefix('user')->group(function () {
+
+    Route::post('/', [CreateUserController::class, '__invoke'])
+        ->name('api.user.create');
+
+    Route::post('/permission/{uuid}', [PermissionUserController::class, '__invoke'])
         ->whereUuid('uuid')
-        ->name('api.members.list');
+        ->name('api.user.permission');
 
+    Route::put('/{id}', [EditUserController::class, '__invoke'])
+        ->where('id', '[0-9]+')
+        ->name('apr.user.edit');
 
-    Route::prefix('user')->group(function () {
+    Route::delete('/{id}', [DeleteUserController::class, '__invoke'])
+        ->where('id', '[0-9]+')
+        ->name('api.user.del');
 
-        Route::post('/', [CreateUserController::class, '__invoke'])
-            ->name('api.user.create');
+    // Route::patch('/alterPermissions/{uuid}', [UserController::class, 'alterUserPermission']);
+    // Route::patch('/type/{id}', [UserController::class, 'updateUserType']);
 
-        Route::post('/permission/{uuid}', [PermissionUserController::class, '__invoke'])
-            ->whereUuid('uuid')
-            ->name('api.user.permission');
+});
 
-        Route::put('/{id}', [EditUserController::class, '__invoke'])
-            ->where('id', '[0-9]+')
-            ->name('apr.user.edit');
+Route::prefix('product')->group(function () {
 
-        Route::delete('/{id}', [DeleteUserController::class, '__invoke'])
-            ->where('id', '[0-9]+')
-            ->name('api.user.del');
+    Route::get('/{uuid}', [ShowProductController::class, '__invoke'])
+        ->whereUuid('uuid')
+        ->name('api.product.show');
 
-        // Route::patch('/alterPermissions/{uuid}', [UserController::class, 'alterUserPermission']);
-        // Route::patch('/type/{id}', [UserController::class, 'updateUserType']);
+    Route::post('/', [CreateProductController::class, '__invoke'])
+        ->name('api.product.create');
 
-    });
+    Route::post('/active/{uuid}', [ActiveProductController::class, '__invoke'])
+        ->whereUuid('uuid')
+        ->name('api.product.active');
 
-    Route::prefix('product')->group(function () {
+    Route::put('/{uuid}', [EditProductController::class, '__invoke'])
+        ->whereUuid('uuid')
+        ->name('api.product.edit');
 
-        Route::get('/{uuid}', [ShowProductController::class, '__invoke'])
-            ->whereUuid('uuid')
-            ->name('api.product.show');
+    Route::delete('/{uuid}', [DeleteProductController::class, '__invoke'])
+        ->whereUuid('uuid')
+        ->name('api.product.del');
+});
 
-        Route::post('/', [CreateProductController::class, '__invoke'])
-            ->name('api.product.create');
+Route::prefix('squad')->group(function () {
 
-        Route::post('/active/{uuid}', [ActiveProductController::class, '__invoke'])
-            ->whereUuid('uuid')
-            ->name('api.product.active');
+    Route::get('/{uuid}', action: [ShowSquadController::class, '__invoke'])
+        ->whereUuid('uuid')
+        ->name('api.squad.show');
 
-        Route::put('/{uuid}', [EditProductController::class, '__invoke'])
-            ->whereUuid('uuid')
-            ->name('api.product.edit');
+    Route::post('/', [CreateSquadController::class, '__invoke'])
+        ->name('api.squad.create');
 
-        Route::delete('/{uuid}', [DeleteProductController::class, '__invoke'])
-            ->whereUuid('uuid')
-            ->name('api.product.del');
+    Route::put('/{uuid}', [EditSquadController::class, '__invoke'])
+        ->whereUuid('uuid')
+        ->name('api.squad.edit');
 
-    });
+    Route::delete('/{uuid}', [DeleteSquadController::class, '__invoke'])
+        ->whereUuid('uuid')
+        ->name('api.squad.del');
 
-    Route::prefix('squad')->group(function () {
+    Route::prefix('{uuid}/member')->group(function () {
 
-        Route::get('/{uuid}', action: [ShowSquadController::class, '__invoke'])
-            ->whereUuid('uuid')
-            ->name('api.squad.show');
+        Route::get('/{memberUuid}', [ShowMemberController::class, '__invoke'])
+            ->whereUuid('memberUuid')
+            ->name('api.member.show');
 
-        Route::post('/', [CreateSquadController::class, '__invoke'])
-            ->name('api.squad.create');
+        Route::post('/', [CreateMemberController::class, '__invoke'])
+            ->name('api.member.create');
 
-        Route::put('/{uuid}', [EditSquadController::class, '__invoke'])
-            ->whereUuid('uuid')
-            ->name('api.squad.edit');
+        Route::put('/{memberUuid}', [EditMemberController::class, '__invoke'])
+            ->whereUuid('memberUuid')
+            ->name('api.member.edit');
 
-        Route::delete('/{uuid}', [DeleteSquadController::class, '__invoke'])
-            ->whereUuid('uuid')
-            ->name('api.squad.del');
-
-        Route::prefix('{uuid}/member')->group(function () {
-
-            Route::get('/{memberUuid}', [ShowMemberController::class, '__invoke'])
-                ->whereUuid('memberUuid')
-                ->name('api.member.show');
-
-            Route::post('/', [CreateMemberController::class, '__invoke'])
-                ->name('api.member.create');
-
-            Route::put('/{memberUuid}', [EditMemberController::class, '__invoke'])
-                ->whereUuid('memberUuid')
-                ->name('api.member.edit');
-
-            Route::delete('/{memberUuid}', [DeleteMemberController::class, '__invoke'])
-                ->whereUuid('memberUuid')
-                ->name('api.member.del');
-
-        });
+        Route::delete('/{memberUuid}', [DeleteMemberController::class, '__invoke'])
+            ->whereUuid('memberUuid')
+            ->name('api.member.del');
     });
 });
