@@ -8,25 +8,25 @@ use App\Http\Controllers\Controller;
 
 class DeleteUserController extends Controller
 {
-    public function __invoke(Request $request, string $id)
+    public function __invoke(Request $request, string $uuid)
     {
         $user = auth()->user();
 
-        if ($user->uuid !== $id) {
+        if ($user->uuid !== $uuid) {
 
             return response()->json([
                 'error' => 'Você não tem permissão para deletar este usuário.',
             ], 403);
         }
 
-        if (!$id) {
+        if (!$uuid) {
 
             return response()->json([
                 'error' => 'O email é necessário para deletar o usuário.',
             ], 400);
         }
 
-        $user = User::query()->where('uuid', $id)->first();
+        $user = User::query()->where('uuid', $uuid)->first();
 
         if (!$user) {
 

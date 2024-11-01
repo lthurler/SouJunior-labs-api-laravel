@@ -12,11 +12,16 @@ class Member extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = ['uuid', 'name', 'role', 'squad_uuid'];
+    protected $fillable = ['uuid', 'name', 'role', 'squad_uuid'];
 
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = [];
+    protected $casts = [
+        'uuid' => 'string',
+        'name' => 'string',
+        'role' => 'string',
+        'squad_uuid' => 'string'
+    ];
 
 }

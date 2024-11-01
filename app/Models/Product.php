@@ -12,10 +12,14 @@ class Product extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = [];
+    protected $fillable = ['uuid', 'owner_uuid', 'name', 'description', 'active'];
 
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = [];
+    protected $casts = [
+        'uuid' => 'string',
+        'owner_uuid' => 'string',
+        'active' => 'integer'
+    ];
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Products;
+namespace App\Http\Controllers\Product;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ class DeleteProductController extends Controller
 {
     public function __invoke(string $uuid)
     {
-        $product = Product::query()->where('uuid', $uuid);
+        $product = Product::query()->where('uuid', $uuid)->first();
 
         $user = auth()->user();
 

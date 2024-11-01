@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Members;
+namespace App\Http\Controllers\Member;
 
 use Ramsey\Uuid\Uuid;
 use App\Models\Member;
@@ -16,6 +16,7 @@ class CreateMemberController extends Controller
         $member->uuid = Uuid::uuid4()->toString();
         $member->name = $request->input('name');
         $member->role = $request->input('role');
+        $member->squad_uuid = $request->input('squad_uuid');
         $member->save();
 
         return response()->json([

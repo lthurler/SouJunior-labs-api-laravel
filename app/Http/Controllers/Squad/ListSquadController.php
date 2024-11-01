@@ -8,17 +8,17 @@ use App\Http\Controllers\Controller;
 
 class ListSquadController extends Controller
 {
-    public function __invoke(string $productUuid = false)
+    public function __invoke(string $productUuid = '')
     {
         if (!empty($productUuid)) {
 
-            $squad = Squad::query()->where('product_uuid', $productUuid)->first();
+            $squads = Squad::query()->where('product_uuid', $productUuid)->get();
 
         } else {
 
-            $squad = Squad::all();
+            $squads = Squad::all();
         }
 
-        return response()->json($squad, 200);
+        return response()->json($squads, 200);
     }
 }

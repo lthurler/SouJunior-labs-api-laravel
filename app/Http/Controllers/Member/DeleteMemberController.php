@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Members;
+namespace App\Http\Controllers\Member;
 
 use App\Models\Member;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ class DeleteMemberController extends Controller
 {
     public function __invoke(string $uuid, string $memberUuid)
     {
-        $member = Member::query()->where(['uuid' => $uuid])->first();
+        $member = Member::query()->where(['uuid' => $memberUuid])->first();
 
         if (!$member) {
 

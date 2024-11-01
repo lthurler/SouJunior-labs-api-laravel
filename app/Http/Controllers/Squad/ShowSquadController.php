@@ -10,7 +10,7 @@ class ShowSquadController extends Controller
 {
     public function __invoke(string $uuid)
     {
-        $squad = Squad::query()->where('uuid', $uuid);
+        $squad = Squad::query()->where('uuid', $uuid)->first();
 
         if (!$squad) {
 

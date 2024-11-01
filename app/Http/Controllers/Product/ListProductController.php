@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Products;
+namespace App\Http\Controllers\Product;
 
 use App\Models\Product;
 use App\Http\Controllers\Controller;
 
 class ListProductController extends Controller
 {
-    public function __invoke(string $userUuid = "")
+    public function __invoke(string $userUuid = '')
     {
         if (!empty($userUuid)) {
 

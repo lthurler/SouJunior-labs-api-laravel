@@ -24,11 +24,11 @@ class CreateUserController extends Controller
 
         $request->validate([
 
-            'name' => ['required|string|max:60'],
-            'email' => ['required|email|unique:users'],
+            'name' => ['required', 'string', 'max:60'],
+            'email' => ['required', 'email', 'unique:users'],
             'linkedin' => ['required'],
-            'password' => ['required|min:8'],
-            'register_token' => ['required|string']
+            'password' => ['required', 'min:8'],
+            'register_token' => ['required', 'string']
 
         ], [
             'name.required' => 'O campo nome é obrigatório.',

@@ -12,9 +12,14 @@ class Squad extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = ['uuid', 'product_uuid', 'name', 'description'];
+    protected $fillable = ['uuid', 'product_uuid', 'name', 'description'];
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = [];
+    protected $casts = [
+        'uuid' => 'string',
+        'product_uuid' => 'string',
+        'name' => 'string',
+        'description' => 'string'
+    ];
 }

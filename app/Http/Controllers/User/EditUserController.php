@@ -8,9 +8,9 @@ use App\Http\Controllers\Controller;
 
 class EditUserController extends Controller
 {
-    public function __invoke(Request $request, string $id)
+    public function __invoke(Request $request, string $uuid)
     {
-        $user = User::query()->where('uuid', $id)->first();
+        $user = User::query()->where('uuid', $uuid)->first();
 
         if (!$user) {
 
@@ -21,9 +21,9 @@ class EditUserController extends Controller
 
         $request->validate([
 
-            'name' => ['string|max:60'],
-            'email' => ['email'],
-            'password' => ['min:8'],
+            'name' => ['required', 'string', 'max:60'],
+            'email' => ['nullable', 'email'],
+            'password' => ['min:8']
 
         ], [
             'name.string' => 'O campo nome deve ser uma string.',
@@ -38,7 +38,11 @@ class EditUserController extends Controller
         $password = $request->input('password');
 
         $user->name = $name;
-        $user->email = $email;
+
+        if ($email) {
+            $user->email = $email;
+        }
+
         $user->linkedin = $linkedin;
 
         if ($password) {
