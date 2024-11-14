@@ -34,9 +34,9 @@ class CreateUserController extends Controller
             'name.required' => 'O campo nome é obrigatório.',
             'name.string' => 'O campo nome deve ser uma string.',
             'name.max' => 'O campo nome não pode ter mais de :max caracteres.',
-            /* 'email.required' => 'O campo e-mail é obrigatório.', */
-            /* 'email.email' => 'O campo e-mail deve ser um endereço de e-mail válido.', */
-            /* 'email.unique' => 'Já existe uma conta com este e-mail.', */
+            'email.required' => 'O campo e-mail é obrigatório.',
+            'email.email' => 'O campo e-mail deve ser um endereço de e-mail válido.',
+            'email.unique' => 'Já existe uma conta com este e-mail.',
             'password.required' => 'O campo senha é obrigatório.',
             'password.min' => 'O campo senha deve ter pelo menos :min caracteres.',
             'register_token.required' => 'O campo register_token é obrigatório.',
