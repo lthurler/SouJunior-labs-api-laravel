@@ -5,18 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Members extends Model
+class Product extends Model
 {
     use HasFactory;
 
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = ['uuid', 'name', 'role', 'squad_uuid'];
+    protected $fillable = ['uuid', 'owner_uuid', 'name', 'description', 'active'];
 
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = [];
-
+    protected $casts = [
+        'uuid' => 'string',
+        'owner_uuid' => 'string',
+        'active' => 'integer'
+    ];
 }
